@@ -21,7 +21,7 @@ sub new {
     $self->{url} = "https://$self->{hostname}";
     $self->{ua} = LWP::UserAgent->new;
 
-    bless $selfi, $class;
+    bless $self, $class;
     return $self;
 }
 
