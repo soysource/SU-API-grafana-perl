@@ -28,6 +28,20 @@ sub new {
 }
 
 my $info = new();
+print Dumper $info if $ENV{debug};
 
-print Dumper $info;
+my $content_type = "application/json";
+my $dashboard ="switch";
+my $uri = URI->new("$info->{url}/dashboards/$dashboard");
 
+my $req = HTTP::Request->new('GET' => "$uri");
+$req->content_type($content_type);
+$req->header( Authorization => $info->{auth} );
+$req->header( Accept => $content_type );
+
+print Dumper $req;
+
+my $ua = LWP::UserAgent->new;
+my $response = $ua->request($req);
+
+print Dumper $response;
